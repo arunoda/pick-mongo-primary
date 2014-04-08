@@ -8,7 +8,7 @@
   },
   "main": "./lib/pickMongoPrimary.js",
   "bin": {
-    "wait-for-mongo": "./bin/pick-mongo-primary"
+    "pick-mongo-primary": "./bin/pick-mongo-primary"
   },
   "author": "Arunoda Susiripala <arunoda.susiripala@gmail.com>",
   "repository": {
