@@ -17,9 +17,15 @@ pickMongoPrimary(MONGO_URL, {timeout: TIMEOUT}, function(err, primary) {
   } else {
     var parsedMongoURL = mongodbUrl.parse(MONGO_URL);
 
-    var mongoShellConfig = util.format("%s/%s -u %s -p %s", 
-      primary, parsedMongoURL.database, parsedMongoURL.username, parsedMongoURL.password
+    var mongoShellConfig = util.format("%s/%s", 
+      primary, parsedMongoURL.database
     );
+
+    if(parsedMongoURL.username) {
+      mongoShellConfig = util.format("%s -u %s -p %s", 
+        mongoShellConfig, parsedMongoURL.username, parsedMongoURL.password
+      );
+    }
     console.log(mongoShellConfig);
     process.exit(0);
   }
