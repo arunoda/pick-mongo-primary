@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+var mongodbUrl = require('mongodb-uri');
+var util = require('util');
+var pickMongoPrimary = require('../');
+var MONGO_URL= process.argv[2] || process.env.MONGO_URL;
+var TIMEOUT = process.argv[3] || process.env.TIMEOUT;
+
+if(!MONGO_URL) {
+  console.error("MONGO_URL is not provided either using first paramater or as a env. variable");
+  process.exit(1);
+}
+
+pickMongoPrimary(MONGO_URL, {timeout: TIMEOUT}, function(err, primary) {
+  if(err) {
+    throw err;
+  } else {
+    var parsedMongoURL = mongodbUrl.parse(MONGO_URL);
+
+    var mongoShellConfig = util.format("%s/%s -u %s -p %s", 
+      primary, parsedMongoURL.database, parsedMongoURL.username, parsedMongoURL.password
+    );
+    console.log(mongoShellConfig);
+    process.exit(0);
+  }
+});
