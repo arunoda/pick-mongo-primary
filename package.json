@@ -3,7 +3,7 @@
   "version": "0.4.0",
   "description": "Get MongoDB Shell command to PRIMARY from the Mongo URL",
   "dependencies": {
-    "mongodb": "2.1.0",
+    "mongodb": "2.2.4",
     "mongodb-uri": "0.9.x"
   },
   "main": "./lib/pickMongoPrimary.js",
